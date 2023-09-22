@@ -4,9 +4,9 @@ function getComputerChoice() {
     return choices[randomIndex];
 }
 
-function playRound() {
+
+function playRound(playerSelection) {
     let computerSelection = getComputerChoice();
-    let playerSelection = prompt("Rock, paper or scissors?");
     playerSelection = playerSelection.toLowerCase();
 
     if (playerSelection === "rock" || playerSelection === "paper" || playerSelection === "scissors") {
@@ -15,28 +15,37 @@ function playRound() {
 
         if (playerSelection === computerSelection.toLowerCase()) {
             console.log("Draw!");
+            return "It's a draw! Computer chose " + computerSelection + ".";
         } else if (
             (playerSelection === "rock" && computerSelection === "Scissors") ||
             (playerSelection === "paper" && computerSelection === "Rock") ||
             (playerSelection === "scissors" && computerSelection === "Paper")
         ) {
             console.log("You win!");
+            return "You win! Computer chose " + computerSelection + ".";
         } else {
             console.log("Computer wins!");
+            return "Computer wins! Computer chose " + computerSelection + ".";
         }
     } else {
         console.log("Invalid choice.");
+        return "Invalid choice. Please choose Rock, Paper, or Scissors.";
     }
 }
-function game(){
-    let rounds = 0
-    let tobeplayed = prompt("How many rounds you want to play?");
-    while (rounds < tobeplayed) {
-        playRound()
-        rounds++;
 
 
-      }
-}
-game()
 
+document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById("rock").addEventListener("click", () => {
+        const result = playRound("rock");
+        document.getElementById("result").textContent = result;
+    });
+    document.getElementById("paper").addEventListener("click", () => {
+        const result = playRound("paper");
+        document.getElementById("result").textContent = result;
+    });
+    document.getElementById("scissors").addEventListener("click", () => {
+        const result = playRound("scissors");
+        document.getElementById("result").textContent = result;
+    });
+});
